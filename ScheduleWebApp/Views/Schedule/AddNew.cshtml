@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 align="center">Assign and Notes</h2>
+
+<div align="center">
+    <div>
+        <p>monday</p>
+        <input type="text" name="dayone"><br>
+        <p>Tuesday</p>
+        <input type="text" name="daytwo"><br>
+        <p>Wednesday</p>
+        <input type="text" name="daythree"><br>
+        <p>Thursday</p>
+        <input type="text" name="dayfour"><br>
+        <p>Friday</p>
+        <input type="text" name="dayfive"><br>
+
+        <p>select Driver</p>
+        <input type="text" name="SelectName"><br>
+
+        <p>Select Route</p>
+        <input type="text" name="choose Route">
+
+        <p>Route start location</p>
+        <input type="text" name="start location"><br>
+
+        <p>Route End location</p>
+        <input type="text" name="End location"><br>
+
+
+    </div>
+</div>
+
+
+@*<form id="myForm" action="comment.php" method="post">
+        Student: <input type="text" name="name" />
+        Staff: <input type="text" name="name" />
+        Comment: <textarea name="comment"></textarea>
+        <input type="submit" value="Submit Comment" />
+    </form>*@
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+        //    // bind 'myForm' and provide a simple callback function
+        //    $('#myForm').ajaxForm(function() {
+        //        alert("Thank you for your comment!");
+        //    });
+        //});
+
+
+
+
+
+
+            //for staff
+            $.ajax({
+                method: 'GET',
+                url: 'http://localhost:58371/api/Staff',
+                dataType: 'json'
+            }).done(function (data) {
+                $.map(data, function (post, j) {
+                    staffName = post.name;
+                    $('#staffList').append("<option value='" + staffName + "'>" + staffName + "</option>");
+
+                });
+            });
+
+
+            //for students
+            $.ajax({
+                method: 'GET',
+                url: 'http://localhost:58371/api/student',
+                dataType: 'json'
+
+            }).done(function (data) {
+                $.map(data, function (post, j) {
+                    studentName = post.name;
+                    $('#studentList').append("<option value='" + studentName + "'>" + studentName + "</option>");
+
+                });
+            });
+
+            var conceptName = $('#studentList').find(":selected").text();
+
+            console.log("you have selected " + conceptName);
+
+        });
+
+
+
+
+    </script>
+}

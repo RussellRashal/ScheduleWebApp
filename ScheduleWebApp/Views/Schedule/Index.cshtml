@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<h2>Schedule</h2>
+
+<table id="scheduleTable" border="1" width="1200">
+
+    <thead>
+
+
+        <tr>
+            <th>DriverName</th>
+
+            <th>Monday </th>
+
+            <th>Tuesday </th>
+
+            <th>Wednesday</th>
+
+            <th>Thursday</th>
+
+            <th>Friday</th>
+
+
+        </tr>
+        <tr id="0_RowTable"></tr>
+
+
+
+
+    </thead>
+    <tbody>
+
+    </tbody>
+   
+
+
+    @*<tr id="row1">
+        <td id="r0_driverName">&nbsp;</td>
+        <td id="r0_day1"></td>
+        <td id="r0_day2"></td>
+        <td id="r0_day3"></td>
+        <td id="r0_day4"></td>
+        <td id="r0_day5"></td>
+    </tr>*@
+
+
+
+
+
+
+
+
+</table>
+}
+
+@section scripts
+{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            //figure out how to dynically get entries in db table
+            var totalLengthInDb = 5;
+            
+
+
+
+
+
+
+
+            //do not touch this code 
+            for (j = 0; j < totalLengthInDb; j++) {
+
+                $('#' + j + '_RowTable').append('<td id="r' + j + '_driverName"' + '>' + "&nbsp;" + '</option>');
+
+                for (i = 1; i < 5; i++) {
+                    $('#' + j + '_RowTable').append('<td id="r' + j + '_day' + i + '">' + "&nbsp;" + '</option>');
+
+
+                }
+
+                //add a new row 
+                k = j + 1; //0_rowtable + 1 which makes the next row
+                $('#' + j + '_RowTable').after('<tr id="' + k + '_RowTable"></tr>'); 
+            };     
+            
+
+
+            $.ajax({
+                method: 'GET',
+                url: 'http://localhost:58371/api/Schedule',
+                dataType: 'json'
+            }).done(function (data) {
+                $.map(data, function (post, dataloop) {             
+
+               
+                    mondayValue = post.monday;
+                    tuesdayValue = post.tuesday;
+                    wednesdayValue = post.wednesday;
+                    thursdayValue = post.thursday;
+                    fridayValue = post.friday;
+
+
+                    driver = post.Driver.name;
+
+                    var numberofentries = dataloop;
+
+                            
+
+
+
+                    $('#r' + dataloop  + '_driverName').append("<td>" + driver + "</td");
+
+
+
+
+                    if (mondayValue == true) {
+                        testDataFunction(dataloop, 1);
+                    }
+
+                    if (tuesdayValue == true) {
+                        testDataFunction(dataloop, 2);
+                    }
+
+                    if (wednesdayValue == true) {
+                        testDataFunction(dataloop, 3);
+                    }
+                    // == operator checks wheather the value is True or false
+                    if (thursdayValue == true) {                       
+                        testDataFunction(dataloop, 4);
+                    }
+
+                    if (fridayValue == true) {                        
+                        testDataFunction(dataloop, 5);
+                    }
+                                   
+                });
+
+                function testDataFunction(dataloop, dayNumber) {
+                        $('#r' + dataloop + '_day' + dayNumber).replaceWith("<td bgcolor='#0000FF'></td")
+                }
+             
+            });
+    });
+    </script>
+}

@@ -1,0 +1,62 @@
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, td, th {
+        border: 1px solid black;
+    }
+</style>
+<table>
+    <tr>
+        <th>Student</th>
+        <th>8:00am</th>
+        <th>8:30am</th>
+        <th>9:00am</th>
+        <th>9:30am</th>
+        <th>10:00am</th>
+        <th>10:30am</th>
+        <th>11:00am</th>
+        <th>11:30am</th>
+        <th>12:00pm</th>
+        <th>12:30pm</th>
+        <th>1:00pm</th>
+        <th>1:30pm</th>
+        <th>2:00pm</th>
+        <th>2:30pm</th>
+        <th>3:00pm</th>
+        <th>3:30pm</th>
+        <th>4:00pm</th>
+        <th>4:30pm</th>
+        <th>5:00pm</th>
+        <th>5:30pm</th>
+        <th>6:00pm</th>
+    </tr>
+
+    <tr>
+        <td>&nbsp;</td>
+        <td></td>
+        <td bgcolor="#FF0000" id="r1t8:00"></td>
+        <td id="r1t8:30"></td>
+        <td id="r1t9:00"></td>
+        <td id="r1t9:30"></td>
+        <td id="r1t10:00"></td>
+        <td id="r1t10:30"></td>
+        <td id="r1t11:00"></td>
+        <td id="r1t11:30"></td>
+        <td id="r1t12:00"></td>
+        <td id="r1t12:30"></td>
+        <td id="r1t1:00"></td>
+        <td id="r1t1:30"></td>
+        <td id="r1t2:00"></td>
+        <td id="r1t2:30"></td>
+        <td id="r1t3:00"></td>
+        <td id="r1t3:30"></td>
+        <td id="r1t4:00"></td>
+        <td id="r1t4:30"></td>
+        <td id="r1t5:00"></td>
+        <td id="r1t5:30"></td>
+        <td id="r1t6:00"></td>
+    </tr>
+
+</table>

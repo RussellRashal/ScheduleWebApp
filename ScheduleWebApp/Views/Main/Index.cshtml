@@ -1,0 +1,253 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<header>
+    <h1 align="center">Today's Train Schedule</h1>
+    <style>
+        .odd {
+            background-color: white;
+        }
+
+        .even {
+            background-color: gray;
+        }
+    </style>
+
+</header>
+
+
+    <table id="scheduleTable" border="1" width="1200">
+
+        <tr>
+            <th>Driver Name</th>
+
+            <th id="c1">Monday </th>
+
+            <th id="c2">Tuesday </th>
+
+            <th id="c3">Wednesday</th>
+
+            <th id="c4">Thursday</th>
+
+            <th id="c5">Friday</th>
+
+
+
+
+        </tr>
+
+
+        @*<tr id="row1">
+            <td id="r0_driverName">&nbsp;</td>
+            <td id="r0_day1"></td>
+            <td id="r0_day2"></td>
+            <td id="r0_day3"></td>
+            <td id="r0_day4"></td>
+            <td id="r0_day5"></td>
+        </tr>
+
+        <tr>
+            <td id="r1_driverName">&nbsp;</td>
+            <td id="r1_day1"></td>
+            <td id="r1_day2"></td>
+            <td id="r1_day3"></td>
+            <td id="r1_day4"></td>
+            <td id="r1_day5"></td>
+
+
+        </tr>
+
+        <tr>
+            <td id="r2_driverName">&nbsp;</td>
+            <td id="r2_day1"></td>
+            <td id="r2_day2"></td>
+            <td id="r2_day3"></td>
+            <td id="r2_day4"></td>
+            <td id="r2_day5"></td>
+
+        </tr>*@
+
+    </table>
+
+    <p>&nbsp</p>
+    <p>&nbsp</p>
+    <p align="right">
+        Blue = 6am to 12pm 
+        <br />Red = 12pm to 6pm
+        <br />Green = Assigned
+    </p>
+
+    @section scripts
+{
+        <script>
+
+
+
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://localhost:58371/api/Schedule',
+                    dataType: 'json'
+                }).done(function (data) {
+                    $.map(data, function (post, j) {
+
+
+                        $.getJSON("Schedule.json", function (data) {
+                            var Schedule_data = '';
+                            $.each(data, function (key, value) {
+                                Schedule_data += '<tr>';
+                                Schedule_data += '<td>' + value.DriverName + '</td>';
+                                Schedule_data += '<td>' + value.Monday + '</td>';
+                                Schedule_data += '<td>' + value.Tuesday + '</td>';
+                                  Schedule_data += '<td>' + value.Wednesday + '</td>';
+                                 Schedule_data += '<td>' + value.Thursday + '</td>';
+                                Schedule_data += '<td>' + value.Friday + '</td>';
+                                Schedule_data += '</tr>';
+
+                            });
+
+
+
+
+                        });
+
+
+                     //table generation 
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        $('#scheduleTable').append(Schedule_data);
+                        //     $(document).ready(function () {
+                        //   $.ajax({
+                        //   method: 'GET',   // This function will collect the data
+                        //   url: '',
+                        //  dataType: 'json'
+                        //  }).done(function (data) {
+                        ///  $.map(data, function (post, j) {
+
+                        //                        dayStart = post.StartDay.substr(11); //dayStart is the variable name
+                        //                        StringdayStart = parseString(dayStart)
+
+                        //                        dayend = post.endday.substr(11);
+                        //                        Stringdayend = parseString(dayend)
+
+
+
+                        //                        for (i = dayStart; i <= endday; i++) {                                                               //require to use replace with because it doesn't contain the color for the cells
+
+                        //                            //  $('#row1'+ days[i]).css('background', 'orange');
+                        //                            //console.log(days[i])
+                        //                            //     for (j = 1 ; j<= 2; j++){
+
+                        //                            $('#r' + j + '_day' + i).replaceWith("<td class ='r1_driverName' bgcolor='#0000FF'></td");
+
+                        //                        }
+                        //                  function SelectedCell(e) {
+
+                        //                      var cells = document.getElementsByTagName("td");
+
+                        //                      for (var r0_ = 0; r0_ < cells.length; r0_++) {
+
+                        //                     cells[r0_].getElementsByTagName("a")[0].style.backgroundColor = '#226a6f';
+
+
+
+                        //                      }
+                        //                 e.target.getElementsByTagName("a")[0].style.backgroundColor ='blue';
+
+
+                        //                  }
+
+                        Firstday = post.FirstShift;//.substr(11);
+                        intFirstday = parseInt(Firstday);
+
+                        Secondday = post.SecondShift;//.substr(12);
+                        intSecondday = parseInt(Secondday);
+
+                      //  DriverIdentity = post.DriverId;
+                       // intDriverIdentity = parseInt(DriverIdentity);
+                       
+
+                            
+                       // var rowNumber = DriverIdentity;
+
+                        for (var i = Firstday; i <= Secondday; i++) {                                                               //require to use replace with because it doesn't contain the color for the cells
+
+                            //  $('#row1'+ days[i]).css('background', 'orange');
+                            //console.log(days[i])
+
+                            // console.log([i])
+
+
+                            $('#r' + j + '_day' + i).replaceWith("<td class ='r1_driverName' bgcolor='#0000FF'></td");
+
+                        }
+
+
+
+                        //                  function alternate(id) {
+
+                        //                      if (document.getElementsByTagName) {
+
+                        //                          var table = document.getElementById(id);
+
+                        //                          var rows = table.getElementsByTagName("tr");
+
+                        //                          for (i = 0; i < rows.length; i++){
+                        ////manipulate rows
+
+                        //                              if (i % 2 == 0) {
+
+
+                        //                                  rows[i].className = "even";
+
+                        //                              } else {
+
+                        //                                  rows[i].className = "odd";
+
+                        //                              }
+
+                        //                          }
+
+                        //                      }
+
+                        //                  }
+
+
+
+
+
+                        //                      //manipulate rows
+
+
+
+                        DriverName = post.Driver.name;             //yes Ive done this bit becuase before it didnt work of the fact that
+                        //it says that it had got Driver.name
+                        $("#r" + j + "_driverName").replaceWith("<td>" + DriverName + "</td>");
+
+                    });
+
+
+
+                });
+    
+
+        </script>
+
+    }
+
