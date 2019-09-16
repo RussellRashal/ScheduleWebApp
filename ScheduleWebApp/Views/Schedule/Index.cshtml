@@ -69,28 +69,7 @@
             var totalLengthInDbTbl = 5;
             
 
-
-
-
-
-
-
-            //do not touch this code 
-            for (j = 0; j < totalLengthInDbTbl; j++) {
-
-                $('#' + j + '_RowTable').append('<td id="r' + j + '_driverName"' + '>' + "&nbsp;" + '</option>');
-
-                for (i = 1; i < 5; i++) {
-                    $('#' + j + '_RowTable').append('<td id="r' + j + '_day' + i + '">' + "&nbsp;" + '</option>');
-
-
-                }
-
-                //add a new row 
-                k = j + 1; //0_rowtable + 1 which makes the next row
-                $('#' + j + '_RowTable').after('<tr id="' + k + '_RowTable"></tr>'); 
-            };     
-            
+        
 
 
             $.ajax({
@@ -98,8 +77,33 @@
                 url: 'http://localhost:58371/api/Schedule',
                 dataType: 'json'
             }).done(function (data) {
-                $.map(data, function (post, dataloop) {             
 
+                 //for (v = 0; v < data.length; v++) {
+                 //    console.log(data[v].id);
+                 //}
+       
+                var totalLengthInDbTbl = data.length;
+
+
+
+                //do not touch this code 
+                for (j = 0; j < totalLengthInDbTbl; j++) {
+
+                    $('#' + j + '_RowTable').append('<td id="r' + j + '_driverName"' + '>' + "&nbsp;" + '</option>');
+
+                    for (i = 1; i < 5; i++) {
+                        $('#' + j + '_RowTable').append('<td id="r' + j + '_day' + i + '">' + "&nbsp;" + '</option>');
+
+
+                    }
+
+                    //add a new row 
+                    k = j + 1; //0_rowtable + 1 which makes the next row
+                    $('#' + j + '_RowTable').after('<tr id="' + k + '_RowTable"></tr>');
+                };
+
+                $.map(data, function (post, dataloop) {             
+                   
                
                     mondayValue = post.monday;
                     tuesdayValue = post.tuesday;
